@@ -1,0 +1,83 @@
+{% extends "restaurante_app/base.html" %}
+{% load static %}
+{% block content %}
+
+<section id="reservas" class="reservation-section">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <h2>Reserva tu Mesa</h2>
+      <p>
+        Asegura tu lugar en Miramar y disfruta de una experiencia gastronómica inolvidable
+      </p>
+    </div>
+
+    <!-- Reservas existentes -->
+    <div class="mb-12">
+      <div class="card border-ocean-blue/20">
+        <div class="card-header">
+          <div class="card-title">📅 Mis Reservas</div>
+        </div>
+        <div class="card-content space-y-3">
+          {% for r in reservations %}
+          <div class="reservation-item {{ r.status }}">
+            <div>
+              <p class="font-semibold">Mesa para {{ r.guests }} {{ r.guests|pluralize:"persona,personas" }}</p>
+              <p>{{ r.date|date:"d M Y" }} - {{ r.time|time:"H:i" }}</p>
+            </div>
+            <div class="text-right">
+              {% if r.status == 'confirmed' %}
+              <span class="px-2 py-1 rounded-full text-xs" style="background-color:#d1fae5;color:#065f46;">Confirmada</span>
+              {% else %}
+              <span class="px-2 py-1 rounded-full text-xs" style="background-color:#ffedd5;color:#78350f;">Pendiente</span>
+              {% endif %}
+            </div>
+          </div>
+          {% empty %}
+          <p class="text-muted-foreground">Aún no hay reservas.</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulario de Reserva -->
+    <div class="grid lg:grid-cols-2 gap-12 items-start">
+      <div class="card shadow-elegant">
+        <div class="card-header">
+          <div class="card-title">📅 Nueva Reserva</div>
+          <div class="card-description">Complete el formulario para reservar su mesa</div>
+        </div>
+        <div class="card-content">
+          <form method="POST" class="space-y-6">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="button ocean w-full">Confirmar Reserva</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Información adicional -->
+      <div class="space-y-8">
+        <div class="card border-coral-accent/20 info-card">
+          <div class="card-header">
+            <div class="card-title" style="color:#f97316;">⚠ Política de Cancelación</div>
+          </div>
+          <div class="card-content space-y-4">
+            <div style="background-color:#fcd34d10; padding:1rem; border-radius:0.5rem;">
+              <h4>Cancelación con 24hs de anticipación:</h4>
+              <p>Reembolso completo del valor de la reserva</p>
+            </div>
+            <div style="background-color:#fef3c7; padding:1rem; border-radius:0.5rem;">
+              <h4>Cancelación con menos de 24hs:</h4>
+              <p>Solo se reintegra el 30% del valor de la reserva</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

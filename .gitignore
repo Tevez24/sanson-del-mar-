@@ -1,13 +1,1 @@
-
-# Virtual Environment
 restaurante_entorno/
-
-# Database
-db.sqlite3
-
-# Python cache
-__pycache__/
-*.pyc
-
-# IDE specific
-.idx/

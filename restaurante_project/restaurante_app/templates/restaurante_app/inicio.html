@@ -2,8 +2,6 @@
 {% load static %}
 
 {% block content %}
-
-
 <!-- Sección Hero -->
 <section class="bg-cover bg-center h-[80vh] flex flex-col justify-center items-center text-white relative" style="#>
   <div> 
@@ -113,7 +111,47 @@
   </div>
 </div>
 
-<!-- Script de Modales -->
+<!-- Sección de Información Adicional -->
+<section class="py-16 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="bg-white rounded-xl shadow-lg p-8">
+      <h2 class="text-3xl font-bold mb-8 text-blue-700 text-center">ℹ️ Información Adicional</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="font-bold text-xl mb-4 text-gray-800">Política de Reservas</h3>
+          <p class="text-gray-600 mb-6">
+            Las reservas deben realizarse con al menos 24 horas de anticipación. 
+            Se permite cancelar o modificar la reserva hasta 6 horas antes de la hora programada.
+          </p>
+          
+          <h3 class="font-bold text-xl mb-4 text-gray-800">Capacidad del Restaurante</h3>
+          <p class="text-gray-600">
+            Contamos con 50 mesas disponibles. Recomendamos reservar con anticipación para 
+            asegurar su lugar, especialmente en fines de semana y festivos.
+          </p>
+        </div>
+        
+        <div>
+          <h3 class="font-bold text-xl mb-4 text-gray-800">Contacto</h3>
+          <p class="text-gray-600 mb-6">
+            Para cualquier consulta adicional, no dude en contactarnos al 
+            <a href="tel:+1234567890" class="text-blue-600 hover:underline">+1 234 567 890</a> o por correo a
+            <a href="mailto:sazondelmar123@gmail.com" class="text-blue-600 hover:underline">sazondelmar123@gmail.com</a>
+          </p>
+          
+          <h3 class="font-bold text-xl mb-4 text-gray-800">Medidas de Seguridad</h3>
+          <p class="text-gray-600">
+            Seguimos estrictamente las normas de higiene y seguridad para garantizar 
+            un ambiente seguro para todos nuestros clientes y personal.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const profileModal = document.getElementById('profileModal');
@@ -156,44 +194,4 @@
     });
   });
 </script>
-
-
-
-<!-- Sección de Información Adicional -->
-<section class="py-16 bg-gray-50">
-  <div class="max-w-6xl mx-auto px-4">
-    <div class="bg-white rounded-xl shadow-lg p-8">
-      <h2 class="text-3xl font-bold mb-8 text-blue-700 text-center">ℹ️ Información Adicional</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div>
-          <h3 class="font-bold text-xl mb-4 text-gray-800">Política de Reservas</h3>
-          <p class="text-gray-600 mb-6">
-            Las reservas deben realizarse con al menos 24 horas de anticipación. 
-            Se permite cancelar o modificar la reserva hasta 6 horas antes de la hora programada.
-          </p>
-          
-          <h3 class="font-bold text-xl mb-4 text-gray-800">Capacidad del Restaurante</h3>
-          <p class="text-gray-600">
-            Contamos con 50 mesas disponibles. Recomendamos reservar con anticipación para 
-            asegurar su lugar, especialmente en fines de semana y festivos.
-          </p>
-        </div>
-        
-        <div>
-          <h3 class="font-bold text-xl mb-4 text-gray-800">Contacto</h3>
-          <p class="text-gray-600 mb-6">
-            Para cualquier consulta adicional, no dude en contactarnos al 
-            <a href="tel:+1234567890" class="text-blue-600 hover:underline">+1 234 567 890</a> o por correo a
-            <a href="mailto:sazondelmar123@gmail.com" class="text-blue-600 hover:underline">sazondelmar123@gmail.com</a>
-          </p>
-          
-          <h3 class="font-bold text-xl mb-4 text-gray-800">Medidas de Seguridad</h3>
-          <p class="text-gray-600">
-            Seguimos estrictamente las normas de higiene y seguridad para garantizar 
-            un ambiente seguro para todos nuestros clientes y personal.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>{% endblock %}
+{% endblock %}

@@ -1,0 +1,15 @@
+{
+  "name": "sanson-del-mar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwindcss -i ./restaurante_project/restaurante_app/static/css/estilos.css -o ./restaurante_project/restaurante_app/static/css/dist/estilos.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tailwindcss": "^3.4.4"
+  }
+}

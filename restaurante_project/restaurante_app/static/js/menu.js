@@ -25,7 +25,7 @@ const menuItems = [
   },
   {
     id: 4,
-    name: "Pizza Pepperoni",
+    name: "Pizza de Pepperoni",
     category: "Pizzas",
     description: "Pepperoni y extra queso",
     price: 28000,

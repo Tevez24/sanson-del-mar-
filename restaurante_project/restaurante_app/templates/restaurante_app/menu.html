@@ -2,173 +2,159 @@
 {% load static %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Menú Restaurante con Carrito</title>
-    <script src="https://unpkg.com/lucide@0.264.0/dist/lucide.min.js"></script>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-    <style>
-      .bg-background {
-        background-color: #f9fafb;
-      }
-      .text-muted-foreground {
-        color: #6b7280;
-      }
-      .text-ocean-blue {
-        color: #0ea5e9;
-      }
-      .text-coral-accent {
-        color: #f87171;
-      }
-      .badge-secondary {
-        background-color: #0ea5e9;
-        color: white;
-        border-radius: 9999px;
-        padding: 0 0.5rem;
-        font-size: 0.75rem;
-      }
-      .button-ocean {
-        background-color: #0ea5e9;
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: 0.375rem;
-      }
-      .button-outline {
-        border: 1px solid #0ea5e9;
-        color: #0ea5e9;
-        padding: 0.5rem 1rem;
-        border-radius: 0.375rem;
-      }
-      .tabs-trigger {
-        cursor: pointer;
-        padding: 0.5rem 1rem;
-        border-bottom: 2px solid transparent;
-      }
-      .tabs-trigger.active {
-        border-color: #0ea5e9;
-        font-weight: bold;
-      }
-      .modal-bg {
-        background: rgba(0, 0, 0, 0.5);
-      }
-    </style>
-  </head>
+<style>
+  .bg-background {
+    background-color: #f9fafb;
+  }
+  .text-muted-foreground {
+    color: #6b7280;
+  }
+  .text-ocean-blue {
+    color: #0ea5e9;
+  }
+  .text-coral-accent {
+    color: #f87171;
+  }
+  .badge-secondary {
+    background-color: #0ea5e9;
+    color: white;
+    border-radius: 9999px;
+    padding: 0 0.5rem;
+    font-size: 0.75rem;
+  }
+  .button-ocean {
+    background-color: #0ea5e9;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+  }
+  .button-outline {
+    border: 1px solid #0ea5e9;
+    color: #0ea5e9;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+  }
+  .tabs-trigger {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-bottom: 2px solid transparent;
+  }
+  .tabs-trigger.active {
+    border-color: #0ea5e9;
+    font-weight: bold;
+  }
+  .modal-bg {
+    background: rgba(0, 0, 0, 0.5);
+  }
+</style>
 
-  <body class="bg-background min-h-screen">
-
-    <div class="pt-20 pb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Header y carrito -->
-      <div class="flex justify-between items-center mb-8">
-        <div>
-          <h1 class="text-5xl font-bold text-foreground mb-4">Nuestro Menú</h1>
-          <p class="text-xl text-muted-foreground">
-            Descubre nuestra selección de platos exquisitos
-          </p>
-        </div>
-
-        <div class="relative" id="cartButton">
-          <button id="openCartBtn" class="button-ocean flex items-center relative">
-            <svg data-lucide="shopping-cart" class="h-5 w-5 mr-2"></svg>
-            Ver Carrito
-            <span
-              id="cartBadge"
-              class="badge-secondary absolute -top-2 -right-2 bg-coral-accent text-white"
-              >0</span
-            >
-          </button>
-        </div>
-      </div>
-
-      <!-- Tabs -->
-      <div class="mb-8">
-        <div class="flex gap-2">
-          <div id="tabRegular" class="tabs-trigger active">Menú del Restaurante</div>
-          <div id="tabCustom" class="tabs-trigger">Crear Menú Mundial</div>
-        </div>
-      </div>
-
-      <!-- Tab Contents -->
-      <div id="tabContents">
-        <!-- Menú Regular -->
-        <div id="contentRegular">
-          <!-- Filtros y búsqueda -->
-          <div class="space-y-4 mb-8">
-            <div class="flex flex-col sm:flex-row gap-4">
-              <div class="relative flex-1">
-                <svg
-                  data-lucide="search"
-                  class="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground"
-                ></svg>
-                <input
-                  type="text"
-                  placeholder="Buscar platos..."
-                  id="searchInput"
-                  class="pl-10 border rounded w-full py-2 px-3"
-                />
-              </div>
-
-              <div id="categoryButtons" class="flex gap-2 flex-wrap">
-                <!-- Buttons injected by JS -->
-              </div>
-            </div>
-          </div>
-
-          <!-- Menu Items -->
-          <div id="menuItemsContainer" class="space-y-6">
-            <!-- Items injected by JS -->
-          </div>
-        </div>
-
-        <!-- Menú Custom -->
-        <div id="contentCustom" class="hidden">
-          <div id="customMenuContainer" class="space-y-6"></div>
-        </div>
-      </div>
+<div class="pt-20 pb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Header y carrito -->
+  <div class="flex justify-between items-center mb-8">
+    <div>
+      <h1 class="text-5xl font-bold text-foreground mb-4">Nuestro Menú</h1>
+      <p class="text-xl text-muted-foreground">
+        Descubre nuestra selección de platos exquisitos
+      </p>
     </div>
 
-    <!-- Modal Carrito -->
-    <div
-      id="cartModal"
-      class="fixed inset-0 hidden justify-center items-center modal-bg z-50"
-    >
-      <div class="bg-white w-full max-w-3xl rounded shadow-lg p-6 relative">
-        <button
-          id="closeCartBtn"
-          class="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+    <div class="relative" id="cartButton">
+      <button id="openCartBtn" class="button-ocean flex items-center relative">
+        <svg data-lucide="shopping-cart" class="h-5 w-5 mr-2"></svg>
+        Ver Carrito
+        <span
+          id="cartBadge"
+          class="badge-secondary absolute -top-2 -right-2 bg-coral-accent text-white"
+          >0</span
         >
-          &times;
-        </button>
-        <h2 class="text-2xl font-bold mb-4">Mi Carrito</h2>
-        <div id="cartItemsContainer" class="space-y-4 max-h-96 overflow-y-auto"></div>
-        <div class="mt-4 border-t pt-4">
-          <div class="flex justify-between mb-2">
-            <span>Subtotal:</span>
-            <span id="cartSubtotal">0 COP</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="mb-8">
+    <div class="flex gap-2">
+      <div id="tabRegular" class="tabs-trigger active">Menú del Restaurante</div>
+      <div id="tabCustom" class="tabs-trigger">Crear Menú Mundial</div>
+    </div>
+  </div>
+
+  <!-- Tab Contents -->
+  <div id="tabContents">
+    <!-- Menú Regular -->
+    <div id="contentRegular">
+      <!-- Filtros y búsqueda -->
+      <div class="space-y-4 mb-8">
+        <div class="flex flex-col sm:flex-row gap-4">
+          <div class="relative flex-1">
+            <svg
+              data-lucide="search"
+              class="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground"
+            ></svg>
+            <input
+              type="text"
+              placeholder="Buscar platos..."
+              id="searchInput"
+              class="pl-10 border rounded w-full py-2 px-3"
+            />
           </div>
-          <div class="flex justify-between mb-2">
-            <span>IVA (19%):</span>
-            <span id="cartTax">0 COP</span>
+
+          <div id="categoryButtons" class="flex gap-2 flex-wrap">
+            <!-- Buttons injected by JS -->
           </div>
-          <div class="flex justify-between mb-2">
-            <span>Envío:</span>
-            <span id="cartShipping">0 COP</span>
-          </div>
-          <div class="flex justify-between font-bold text-lg mt-2">
-            <span>Total:</span>
-            <span id="cartTotal">0 COP</span>
-          </div>
-          <button id="payBtn" class="button-ocean w-full mt-4">Procesar Pago</button>
         </div>
+      </div>
+
+      <!-- Menu Items -->
+      <div id="menuItemsContainer" class="space-y-6">
+        <!-- Items injected by JS -->
       </div>
     </div>
 
-    <script src="{% static 'js/menu.js' %}"></script>
-  </body>
-</html>
+    <!-- Menú Custom -->
+    <div id="contentCustom" class="hidden">
+      <div id="customMenuContainer" class="space-y-6"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Carrito -->
+<div
+  id="cartModal"
+  class="fixed inset-0 hidden justify-center items-center modal-bg z-50"
+>
+  <div class="bg-white w-full max-w-3xl rounded shadow-lg p-6 relative">
+    <button
+      id="closeCartBtn"
+      class="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+    >
+      &times;
+    </button>
+    <h2 class="text-2xl font-bold mb-4">Mi Carrito</h2>
+    <div id="cartItemsContainer" class="space-y-4 max-h-96 overflow-y-auto"></div>
+    <div class="mt-4 border-t pt-4">
+      <div class="flex justify-between mb-2">
+        <span>Subtotal:</span>
+        <span id="cartSubtotal">0 COP</span>
+      </div>
+      <div class="flex justify-between mb-2">
+        <span>IVA (19%):</span>
+        <span id="cartTax">0 COP</span>
+      </div>
+      <div class="flex justify-between mb-2">
+        <span>Envío:</span>
+        <span id="cartShipping">0 COP</span>
+      </div>
+      <div class="flex justify-between font-bold text-lg mt-2">
+        <span>Total:</span>
+        <span id="cartTotal">0 COP</span>
+      </div>
+      <button id="payBtn" class="button-ocean w-full mt-4">Procesar Pago</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/menu.js' %}"></script>
 {% endblock %}
